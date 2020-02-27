@@ -10,7 +10,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="787.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
@@ -35,7 +35,7 @@
             </MenuBar>
             <HBox spacing="10.0">
                <children>
-                  <MenuButton mnemonicParsing="false" text="Mode">
+                  <MenuButton mnemonicParsing="false" text="DB Selection">
                     <items>
                       <MenuItem mnemonicParsing="false" text="Action 1" />
                       <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -49,23 +49,10 @@
          </children>
       </VBox>
    </top>
-   <left>
-      <TreeView prefHeight="313.0" prefWidth="139.0" BorderPane.alignment="CENTER" />
-   </left>
-   <bottom>
-      <HBox BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Test Tool" />
-         </children>
-         <padding>
-            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-         </padding>
-      </HBox>
-   </bottom>
    <center>
-      <TitledPane animated="false" prefHeight="355.0" prefWidth="461.0" text="Query Builder" BorderPane.alignment="CENTER">
+      <TitledPane animated="false" collapsible="false" prefHeight="355.0" prefWidth="461.0" text="Query Builder" BorderPane.alignment="CENTER">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          <AnchorPane>
                <children>
                   <TextField layoutX="21.0" layoutY="3.0" prefHeight="27.0" prefWidth="88.0" promptText="SS Number" />
                   <TextField layoutX="115.0" layoutY="3.0" prefHeight="27.0" prefWidth="84.0" promptText="First Name" />
@@ -81,4 +68,12 @@
         </content>
       </TitledPane>
    </center>
+   <bottom>
+      <TableView prefHeight="108.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+   </bottom>
 </BorderPane>
