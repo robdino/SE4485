@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="787.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
@@ -35,7 +32,7 @@
             </MenuBar>
             <HBox spacing="10.0">
                <children>
-                  <MenuButton mnemonicParsing="false" text="Mode">
+                  <MenuButton mnemonicParsing="false" text="DB Selection">
                     <items>
                       <MenuItem mnemonicParsing="false" text="Action 1" />
                       <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -49,36 +46,78 @@
          </children>
       </VBox>
    </top>
-   <left>
-      <TreeView prefHeight="313.0" prefWidth="139.0" BorderPane.alignment="CENTER" />
-   </left>
-   <bottom>
-      <HBox BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Test Tool" />
-         </children>
-         <padding>
-            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-         </padding>
-      </HBox>
-   </bottom>
    <center>
-      <TitledPane animated="false" prefHeight="355.0" prefWidth="461.0" text="Query Builder" BorderPane.alignment="CENTER">
+      <TitledPane animated="false" collapsible="false" prefHeight="355.0" prefWidth="461.0" text="Query Builder" BorderPane.alignment="CENTER">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          <AnchorPane>
                <children>
-                  <TextField layoutX="21.0" layoutY="3.0" prefHeight="27.0" prefWidth="88.0" promptText="SS Number" />
-                  <TextField layoutX="115.0" layoutY="3.0" prefHeight="27.0" prefWidth="84.0" promptText="First Name" />
-                  <TextField layoutX="20.0" layoutY="52.0" prefHeight="27.0" prefWidth="52.0" promptText="Low" />
-                  <TextField layoutX="76.0" layoutY="52.0" prefHeight="27.0" prefWidth="46.0" promptText="High" />
-                  <TextField layoutX="208.0" layoutY="3.0" prefHeight="27.0" prefWidth="81.0" promptText="Last Name" />
-                  <TextField layoutX="138.0" layoutY="52.0" promptText="Tax ID" />
-                  <Text layoutX="31.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Credit Range" wrappingWidth="87.2376708984375" />
+                  <TextField fx:id="SS_Number" layoutX="459.0" layoutY="100.0" prefHeight="27.0" prefWidth="104.0" promptText="SS Number" />
+                  <TextField layoutX="14.0" layoutY="100.0" prefHeight="27.0" prefWidth="84.0" promptText="First Name" />
+                  <TextField layoutX="276.0" layoutY="63.0" prefHeight="27.0" prefWidth="52.0" promptText="Low" />
+                  <TextField layoutX="332.0" layoutY="63.0" prefHeight="27.0" prefWidth="50.0" promptText="High" />
+                  <TextField layoutX="107.0" layoutY="100.0" prefHeight="27.0" prefWidth="81.0" promptText="Last Name" />
+                  <Text layoutX="276.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Credit Range" wrappingWidth="87.2376708984375" />
                   <Button layoutX="17.0" layoutY="245.0" mnemonicParsing="false" onAction="#SearchButtonClicked" text="Search" />
-                  <ToggleButton layoutX="21.0" layoutY="93.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="95.0" text="Has Loan" />
+                  <ToggleButton layoutX="393.0" layoutY="266.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="95.0" text="Has Loan" />
+                  <MenuButton fx:id="Customer_Type" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Customer Type">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="PER" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                  </MenuButton>
+                  <MenuButton accessibleRole="BUTTON" layoutX="222.0" layoutY="14.0" mnemonicParsing="false" text="Credit Bureau">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                  </MenuButton>
+                  <MenuButton layoutX="348.0" layoutY="14.0" mnemonicParsing="false" text="PEP">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                        <MenuItem mnemonicParsing="false" text="Action 2" />
+                     </items>
+                  </MenuButton>
+                  <MenuButton layoutX="423.0" layoutY="14.0" mnemonicParsing="false" text="Online Banking">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                        <MenuItem mnemonicParsing="false" text="Action 2" />
+                     </items>
+                  </MenuButton>
+                  <MenuButton layoutX="14.0" layoutY="63.0" mnemonicParsing="false" text="Foreign Indicator">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                        <MenuItem mnemonicParsing="false" text="Action 2" />
+                     </items>
+                  </MenuButton>
+                  <MenuButton layoutX="156.0" layoutY="63.0" mnemonicParsing="false" text="Special Use">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                        <MenuItem mnemonicParsing="false" text="Action 2" />
+                     </items>
+                  </MenuButton>
+                  <TextField layoutX="355.0" layoutY="100.0" prefHeight="27.0" prefWidth="96.0" promptText="Zip Code" />
+                  <TextField layoutX="251.0" layoutY="100.0" prefHeight="27.0" prefWidth="99.0" promptText="City" />
+                  <TextField layoutX="197.0" layoutY="100.0" prefHeight="27.0" prefWidth="44.0" promptText="Age" />
+                  <ComboBox fx:id="state" layoutX="145.0" layoutY="14.0" prefHeight="27.0" prefWidth="76.0" promptText="ST" >
+                      <items>
+                          <FXCollections fx:factory="observableArrayList">
+                              <String fx:value="CA" />
+                              <String fx:value="TX" />
+                              <String fx:value="LA" />
+                          </FXCollections>
+                      </items>
+                  </ComboBox>
                </children>
             </AnchorPane>
         </content>
       </TitledPane>
    </center>
+   <bottom>
+      <TableView prefHeight="108.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+   </bottom>
 </BorderPane>
