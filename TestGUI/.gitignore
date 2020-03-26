@@ -1,2 +1,13 @@
 .idea
 /.idea/
+*.xml
+*.md
+*.jar
+*.properties
+*.dylib
+*.zip
+*.xml
+TestGUI/.idea/misc.xml
+TestGUI/.idea/misc.xml
+*.class
+TestGUI/TestGUI.iml
