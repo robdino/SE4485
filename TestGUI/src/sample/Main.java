@@ -9,13 +9,26 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    Stage window;
+    //Scene search, personView, personExtendedView, businessView;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("ARGO Test Tool");
-        primaryStage.setScene(new Scene(root, 800, 600));
-        primaryStage.show();
+        window = primaryStage;
+
+        Parent search = FXMLLoader.load(getClass().getResource("search.fxml"));
+        window.setTitle("ARGO Test Tool");
+        window.setScene(new Scene(search, 800, 600));
+        window.show();
+
+
+
+
+
+
+
+
 
 
 
