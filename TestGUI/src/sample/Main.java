@@ -22,16 +22,6 @@ public class Main extends Application {
         window.setScene(new Scene(search, 800, 600));
         window.show();
 
-
-
-
-
-
-
-
-
-
-
     }
 
 

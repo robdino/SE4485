@@ -76,8 +76,21 @@ public class BusinessViewController {
         window.show();
     }
 
-    public String updateButtonClicked() {
-        String success = "";
+    public void getOutsideData(Entity entity) {
+        current = entity;
+
+        companyName.setText(current.getName());
+
+        state.getSelectionModel().select(current.getState());
+
+
+
+
+
+    }
+
+    public void updateButtonClicked() {
+        //String success = "";
 
         System.out.println("Company Name: " + getCompanyName());
         System.out.println("Year Established: " + getYearEstablished());
@@ -92,7 +105,7 @@ public class BusinessViewController {
         System.out.println("Zip Code: " + getZipCode());
 
 
-        return success;
+        //return success;
     }
 
     public String insertButtonClicked() {

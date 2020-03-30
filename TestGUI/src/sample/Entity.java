@@ -2,10 +2,14 @@ package sample;
 
 import javafx.beans.property.SimpleStringProperty;
 
+import java.util.Date;
+
 public class Entity {
+    private String custType, firstName, lastName, ssn, telephone, email, address;
     private String name, city, state, creditBureau, PEP, foreignIndicator, specialUse;
     private int age, zipCode, creditScore;
-    private boolean onlineBanking;
+    private String onlineBanking;
+    private Date dob;
 
     Entity(){
     }
@@ -16,6 +20,14 @@ public class Entity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCustType() {
+        return custType;
+    }
+
+    public void setCustType(String custType) {
+        this.custType = custType;
     }
 
     public String getCity() {
@@ -90,11 +102,11 @@ public class Entity {
         this.creditScore = creditScore;
     }
 
-    public boolean isOnlineBanking() {
+    public String getOnlineBanking() {
         return onlineBanking;
     }
 
-    public void setOnlineBanking(boolean onlineBanking) {
+    public void setOnlineBanking(String onlineBanking) {
         this.onlineBanking = onlineBanking;
     }
 }

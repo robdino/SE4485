@@ -68,9 +68,25 @@ public class PersonViewController {
         return address.getText();
     }
 
+    Entity current = new Entity();
+
     @FXML
     public void initialize() {
         personViewInitialization();
+
+    }
+
+    public void getOutsideData(Entity entity) {
+        current = entity;
+
+        firstName.setText(current.getName());
+        lastName.setText(current.getName());
+
+        creditBureau.getSelectionModel().select(current.getCreditBureau());
+        creditScore.setText(Integer.toString(current.getCreditScore()));
+
+
+
 
     }
 

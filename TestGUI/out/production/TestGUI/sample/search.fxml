@@ -118,6 +118,7 @@
                                     <Font size="13.0" />
                                  </font>
                               </Button>
+                              <Button id="expandSelected" mnemonicParsing="false" onAction="#ExpandSelectedButtonClicked" text="Expand Selected" underline="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
                            </children>
                         </GridPane>
                         <TableView fx:id="resultsTable" prefHeight="200.0" prefWidth="200.0">

@@ -89,6 +89,7 @@ public class SearchController {
 
     public AnchorPane searchAnchorPane;
 
+    Entity current = new Entity();
 
     @FXML
     public void initialize() {
@@ -98,10 +99,23 @@ public class SearchController {
     }
 
 
+
     @FXML public void PersonViewClicked() throws IOException {
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("PersonView.fxml"));
+        Parent personViewParent = loader.load();
+
+
         Stage stage = (Stage) searchAnchorPane.getScene().getWindow();
-        Parent personViewParent = FXMLLoader.load(getClass().getResource("PersonView.fxml"));
+        //Parent personViewParent = FXMLLoader.load(getClass().getResource("PersonView.fxml"));
         Scene personViewScene = new Scene(personViewParent, 800, 600);
+
+        PersonViewController controller = loader.getController();
+
+        //controller.getOutsideData(current);
+
+
         Stage window = stage;
 
         window.setScene(personViewScene);
@@ -176,6 +190,63 @@ public class SearchController {
 
     }
 
+    public void ExpandSelectedButtonClicked() throws IOException {
+        Entity selected = resultsTable.getSelectionModel().getSelectedItem();    //<-- How you get whatever was selected
+        Stage stage = (Stage) searchAnchorPane.getScene().getWindow();
+        Stage window = stage;
+
+        if(resultsTable.getSelectionModel().getSelectedItem() == null) {
+            System.out.println("ExpandSelectedButtonClicked(): Nothing selected");
+        }
+        else {
+            if (selected.getCustType() == "BUS"){
+                //expand to business view
+                FXMLLoader BVloader = new FXMLLoader();
+                BVloader.setLocation(getClass().getResource("BusinessView.fxml"));
+                Parent businessViewParent = BVloader.load();
+
+                Scene businessViewScene = new Scene(businessViewParent, 800, 600);
+
+                BusinessViewController BVcontroller = BVloader.getController();
+
+                BVcontroller.getOutsideData(selected);
+
+                window.setScene(businessViewScene);
+                window.show();
+
+            }
+            else if(selected.getCustType() == "PER") {
+                //expand to person view
+                FXMLLoader PVloader = new FXMLLoader();
+                PVloader.setLocation(getClass().getResource("PersonView.fxml"));
+                Parent personViewParent = PVloader.load();
+
+
+                Scene personViewScene = new Scene(personViewParent, 800, 600);
+
+                PersonViewController PVcontroller = PVloader.getController();
+
+                PVcontroller.getOutsideData(selected);
+
+                window.setScene(personViewScene);
+                window.show();
+
+            }
+        }
+
+//        System.out.println("Name: " + selected.getName());
+//        System.out.println("Age: " + selected.getAge());
+//        System.out.println("State: " + selected.getState());
+//        System.out.println("Zip Code: " + selected.getZipCode());
+//        System.out.println("Credit Score: THIS NEEDS DOING");
+//        System.out.println("Credit Bureau: " + selected.getCreditBureau());
+//        System.out.println("Special Use: " + selected.getSpecialUse());
+
+
+
+        // resultsTable.setItems(getEntities());
+    }
+
     private void tableInitialization() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<Entity, String>("name"));
         ageColumn.setCellValueFactory(new PropertyValueFactory<Entity, Integer>("age"));
@@ -195,9 +266,21 @@ public class SearchController {
         frank.setCreditScore(720);
         frank.setCreditBureau("Equifax");
         frank.setSpecialUse("Pig");
+        frank.setCustType("PER");
+
+        Entity frankBurger = new Entity();
+        frankBurger.setName("Frank's Burgers");
+        frankBurger.setAge(50);
+        frankBurger.setState("Texas");
+        frankBurger.setZipCode(75082);
+        frankBurger.setCreditScore(720);
+        frankBurger.setCreditBureau("Equifax");
+        frankBurger.setSpecialUse("Pig");
+        frankBurger.setCustType("BUS");
 
         ObservableList<Entity> entities = FXCollections.observableArrayList();
-        entities.add(frank);
+        entities.addAll(frank, frankBurger, frank, frankBurger, frank, frankBurger, frank, frankBurger);
+        //current = frank;
 
 
         return entities;
