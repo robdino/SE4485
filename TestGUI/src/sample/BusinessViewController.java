@@ -5,12 +5,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class BusinessViewController {
@@ -49,6 +52,8 @@ public class BusinessViewController {
         return state.getSelectionModel().getSelectedItem().toString();
     }
     private String getZipCode() { return zipCode.getText(); }
+
+    String errorMsg = "";
 
     @FXML
     public void initialize() {
@@ -104,6 +109,7 @@ public class BusinessViewController {
         System.out.println("State: " + getState());
         System.out.println("Zip Code: " + getZipCode());
 
+        inputValidate();
 
         //return success;
     }
@@ -122,6 +128,8 @@ public class BusinessViewController {
         System.out.println("City: " + getCity());
         System.out.println("State: " + getState());
         System.out.println("Zip Code: " + getZipCode());
+
+        inputValidate();
 
         return success;
     }
@@ -146,6 +154,103 @@ public class BusinessViewController {
 
     }
 
+    private boolean inputValidate() {
 
+        boolean yearEstResult = validateYearEst();
+        boolean phoneResult = validatePhoneNumber();
+        boolean emailResult = validateEmail();
+        boolean zipcodeResult = validateZipcode();
 
+        if(yearEstResult && phoneResult && emailResult && zipcodeResult && emailResult && phoneResult) {
+            System.out.println("Business Validation Correct");
+            return true;
+        }
+        else {
+            System.out.println("Business Validation Incorrect");
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setHeaderText("Input not valid");
+            errorAlert.setContentText(errorMsg);
+            errorAlert.showAndWait();
+            errorMsg = "";
+            return false;
+        }
+    }
+
+    private boolean validateYearEst() {
+        if(getYearEstablished().length() == 4) {
+            try {
+                Integer.parseInt(getYearEstablished());
+            } catch (Exception error) {
+                errorMsg += "Year is not a number\n";
+                return false;
+            }
+        }
+        else if (getYearEstablished().length() != 0){
+            errorMsg += "Year must be 4 digits long.\n";
+            return false;
+        }
+
+        return true;
+    }
+
+    //length is nvarchar(10)
+    private boolean validatePhoneNumber() {
+        String regex = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher;
+
+        if(getTelephone().length() > 0 /*&& getTelephone().length() <= 10*/) {
+            matcher = pattern.matcher(getTelephone());
+            if(matcher.matches() == true) { /* we good, phone is valid */ }
+            else {
+                errorMsg += "Phone number is not valid.\n";
+                return false;
+            }
+        }
+        /* else if (getTelephone().length() > 10) {
+            errorMsg += "Phone number is greater than 10 characters.\n";
+        } */
+
+        return true;
+    }
+
+    //length is nvarchar(40)
+    private boolean validateEmail() {
+        String regex = "^(.+)@(.+)$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher;
+
+        if(getEmail().length() > 0 && getEmail().length() <= 40) {
+            matcher = pattern.matcher(getEmail());
+            if(matcher.matches() == true) { /* we good, email is valid */ }
+            else {
+                errorMsg += "Email is not valid.\n";
+                return false;
+            }
+        }
+        else if (getEmail().length() > 40){
+            errorMsg += "Email is greater than 10 characters\n";
+            return false;
+        }
+
+        return true;
+    }
+
+    // Reference: https://howtodoinjava.com/regex/us-postal-zip-code-validation/
+    private boolean validateZipcode() {
+        String regex = "^[0-9]{5}(?:-[0-9]{4})?$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher;
+
+        if(getZipCode().length() > 0) {
+            matcher = pattern.matcher(getZipCode());
+            if(matcher.matches() == true) { /* we good, zip code is valid */ }
+            else {
+                errorMsg += "Zip Code is not a valid zip code\n";
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

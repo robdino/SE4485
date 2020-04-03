@@ -13,6 +13,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class SearchController {
@@ -91,6 +93,8 @@ public class SearchController {
 
     Entity current = new Entity();
 
+    private String errorMsg = "";
+
     @FXML
     public void initialize() {
         searchInitialization();
@@ -149,8 +153,9 @@ public class SearchController {
         System.out.println("Credit Low: " + getCreditLow());
         System.out.println("City: " + getCity());
 
-        resultsTable.setItems(getEntities());
-
+        if(inputValidate()) {
+            resultsTable.setItems(getEntities());
+        }
 
     }
 
@@ -234,17 +239,6 @@ public class SearchController {
             }
         }
 
-//        System.out.println("Name: " + selected.getName());
-//        System.out.println("Age: " + selected.getAge());
-//        System.out.println("State: " + selected.getState());
-//        System.out.println("Zip Code: " + selected.getZipCode());
-//        System.out.println("Credit Score: THIS NEEDS DOING");
-//        System.out.println("Credit Bureau: " + selected.getCreditBureau());
-//        System.out.println("Special Use: " + selected.getSpecialUse());
-
-
-
-        // resultsTable.setItems(getEntities());
     }
 
     private void tableInitialization() {
@@ -285,6 +279,94 @@ public class SearchController {
 
         return entities;
 
+    }
+
+    private boolean inputValidate() {
+
+        boolean ageResult = validateAge();
+        boolean zipcodeResult = validateZipcode();
+        boolean creditLowResult = validateCreditLow();
+        boolean creditHighResult = validateCreditHigh();
+
+        if(ageResult && zipcodeResult && creditLowResult && creditHighResult)
+            return true;
+        else {
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setHeaderText("Input not valid");
+            errorAlert.setContentText(errorMsg);
+            errorAlert.showAndWait();
+            errorMsg = "";
+            return false;
+        }
+    }
+
+    private boolean validateAge() {
+        if(getAge().length() > 0 && getAge().length() < 4) {
+            try {
+                Integer.parseInt(getAge());
+            } catch (Exception error) {
+                errorMsg += "Age is not a number\n";
+                return false;
+            }
+        }
+        else if (getAge().length() >= 4){
+            errorMsg += "Age can only be 3 digits long.\n";
+            return false;
+        }
+
+        return true;
+    }
+
+    // Reference: https://howtodoinjava.com/regex/us-postal-zip-code-validation/
+    private boolean validateZipcode() {
+        String regex = "^[0-9]{5}(?:-[0-9]{4})?$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher;
+
+        if(getZipCode().length() > 0) {
+            matcher = pattern.matcher(getZipCode());
+            if(matcher.matches() == true) { /* we good, zip code is valid */ }
+            else {
+                errorMsg += "Zip Code is not a valid zip code\n";
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean validateCreditLow() {
+        if(getCreditLow().length() > 0 && getCreditLow().length() < 4) {
+            try {
+                Integer.parseInt(getCreditLow());
+            } catch (Exception error) {
+                errorMsg += "Credit Score (Low) is not a number\n";
+                return false;
+            }
+        }
+        else if (getCreditLow().length() >= 4){
+            errorMsg += "Credit Score (Low) can only be 3 digits long.\n";
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean validateCreditHigh() {
+        if(getCreditHigh().length() > 0 && getCreditHigh().length() < 4) {
+            try {
+                Integer.parseInt(getCreditHigh());
+            } catch (Exception error) {
+                errorMsg += "Credit Score (High) is not a number\n";
+                return false;
+            }
+        }
+        else if (getCreditHigh().length() >= 4) {
+            errorMsg += "Credit Score (High) can only be 3 digits long.\n";
+            return false;
+        }
+
+        return true;
     }
 
 }
