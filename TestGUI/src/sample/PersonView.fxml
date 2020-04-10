@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
@@ -17,7 +22,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.PersonViewController">
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.PersonViewController">
     <center>
         <TitledPane animated="false" collapsible="false" text="Person" BorderPane.alignment="CENTER">
             <content>
@@ -101,7 +106,9 @@
                               <Button fx:id="insert" mnemonicParsing="false" onAction="#InsertButtonClicked" text="Insert" underline="true" />
                            </children>
                         </HBox>
-                        <Button fx:id="viewMore" mnemonicParsing="false" text="View More" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                        <Button fx:id="viewMore" mnemonicParsing="false" text="View More" underline="true" GridPane.rowIndex="9" />
+                        <Button fx:id="viewAccounts" mnemonicParsing="false" onAction="#viewAccountsClicked" text="View Accounts" underline="true" GridPane.columnIndex="2" GridPane.rowIndex="9" />
                      </children>
                   </GridPane>
                </children>

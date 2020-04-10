@@ -54,15 +54,19 @@
                                       </items>
                                   </ComboBox>
                         <TextField fx:id="zipCode" prefHeight="27.0" prefWidth="140.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                  <HBox spacing="20.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+                                  <HBox spacing="20.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="BOTTOM">
                                       <children>
                                           <Button fx:id="update" mnemonicParsing="false" onAction="#updateButtonClicked" text="Update" underline="true" />
                                           <Button fx:id="insert" mnemonicParsing="false" onAction="#insertButtonClicked" text="Insert" underline="true" />
                                       </children>
                            <GridPane.margin>
-                              <Insets top="10.0" />
+                              <Insets />
                            </GridPane.margin>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
                                   </HBox>
+                        <Button mnemonicParsing="false" onAction="#viewAccountsClicked" text="View Accounts" underline="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
                      </children>
                   </GridPane>
                     </children>

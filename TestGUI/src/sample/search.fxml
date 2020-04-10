@@ -123,7 +123,6 @@
                         </GridPane>
                         <TableView fx:id="resultsTable" prefHeight="200.0" prefWidth="200.0">
                           <columns>
-                            <TableColumn fx:id="viewButtonColumn" prefWidth="35.29935681819916" />
                             <TableColumn fx:id="nameColumn" prefWidth="114.70064544677734" text="Name" />
                               <TableColumn fx:id="ageColumn" prefWidth="75.0" text="Age" />
                               <TableColumn fx:id="stateColumn" prefWidth="75.0" text="State" />

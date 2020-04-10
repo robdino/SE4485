@@ -133,6 +133,31 @@ public class BusinessViewController {
 
         return success;
     }
+    public void viewAccountsClicked() throws IOException{
+        // Query HS_ACCTS and return list of entities.
+
+
+        Stage stage = (Stage) businessAnchorPane.getScene().getWindow();
+        FXMLLoader AVloader = new FXMLLoader();
+        AVloader.setLocation(getClass().getResource("AcctResults.fxml"));
+        Parent acctResultsViewParent = AVloader.load();
+
+
+        Scene acctResultsViewScene = new Scene(acctResultsViewParent, 800, 600);
+
+        AcctResultController AVcontroller = AVloader.getController();
+
+        AVcontroller.getOutsideData(current);
+
+        Stage window = stage;
+
+        window.setScene(acctResultsViewScene);
+        window.show();
+
+
+
+        // Launch acctsView and fill table with entities
+    }
     private void businessViewInitialization() {
         state.getItems().removeAll(state.getItems());
         state.getItems().addAll("", "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA",

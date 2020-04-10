@@ -156,6 +156,31 @@ public class PersonViewController {
 
         inputValidate();
     }
+    public void viewAccountsClicked() throws IOException{
+        // Query HS_ACCTS and return list of entities.
+
+
+        Stage stage = (Stage) personAnchorPane.getScene().getWindow();
+        FXMLLoader AVloader = new FXMLLoader();
+        AVloader.setLocation(getClass().getResource("AcctResults.fxml"));
+        Parent acctResultsViewParent = AVloader.load();
+
+
+        Scene acctResultsViewScene = new Scene(acctResultsViewParent, 800, 600);
+
+        AcctResultController AVcontroller = AVloader.getController();
+
+        AVcontroller.getOutsideData(current);
+
+        Stage window = stage;
+
+        window.setScene(acctResultsViewScene);
+        window.show();
+
+
+
+        // Launch acctsView and fill table with entities
+    }
 
     public void personViewInitialization() {
 
